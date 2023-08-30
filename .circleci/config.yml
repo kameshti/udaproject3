@@ -33,73 +33,53 @@ commands:
             fi
             
 jobs:
-  jobs:
   build-frontend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
-          keys: [frontend-dependencies]
+          keys: [frontend-build]
       - run:
           name: Build front-end
           command: |
-            cd frontend
-            npm install
-            npm run build
+            # Your code here
+            exit 1
       - save_cache:
           paths: [frontend/node_modules]
-          key: frontend-dependencies 
-      - slack_notifcation
+          key: frontend-build
 
   build-backend:
     docker:
-      - image: cimg/node:13.8.0
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - restore_cache:
-          keys: [backend-dependencies]
-
+          keys: [backend-build]
       - run:
           name: Back-end build
           command: |
-            cd backend
-            npm install
-            npm run build
+             # Your code here
+             exit 1
       - save_cache:
           paths: [backend/node_modules]
-          key: backend-dependencies
-                 
+          key: backend-build
 
   test-frontend:
     docker:
-      - image: cimg/node:13.8.0
+      # Docker image here
     steps:
-      - checkout
-      - restore_cache:
-          keys: [frontend-dependencies]
-      - run:
-          name: Front-end Unit Test
-          command: |
-            cd frontend
-            npm install
-            npm run test
-                 
-
+      # Checkout code from git
+      # Restore from cache
+      # Your job code here
+                
   test-backend:
     docker:
-      - image: cimg/node:13.8.0
+      # Docker image here
     steps:
-      - checkout
-      - restore_cache:
-          keys: [backend-dependencies]
-      - run:
-          name: Back-end Unit Test
-          command: |
-            cd backend
-            npm install
-            npm run test
-      
+      # Checkout code from git
+      # Restore from cache
+      # Your job code here
             
   scan-frontend:
     docker:
